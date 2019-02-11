@@ -1,0 +1,8 @@
+#!/bin/sh
+set -e
+
+# Create state directory and exports file
+
+mkdir -p $SNAP_COMMON/state
+touch $SNAP_COMMON/state/etab $SNAP_COMMON/state/rmtab $SNAP_COMMON/exports
+
