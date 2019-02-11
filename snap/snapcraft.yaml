@@ -1,0 +1,10 @@
+name: nfs-server
+version: 1.3.4
+base: core18
+summary: Network filesystems kernel server
+#architectures: [armhf,amd64]
+grade: stable
+confinement: devmode ## exportfs required devmode or classic (need access to /proc/fs/nfsd directory)
+description: |
+   Network filesystems kernel server snap
+
