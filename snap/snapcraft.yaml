@@ -9,16 +9,20 @@ description: |
    Network filesystems kernel server snap
 
 apps:
-  rpcbind:
     command: rpcbind -w -f
+    #daemon: simple
     plugs: [network, network-bind]
+    #sockets:
+    #  rpcbind:
+    #    listen-stream: $SNAP_COMMON/state/rpcbind.sock
 
   export-fs:
-    command: exportfs -i
+    command: exportfs
     plugs: [home, removable-media, network, network-bind]
 
   export-all:
     command: export-all
+    #daemon: simple
     plugs: [home, removable-media, network, network-bind]
 
 parts:
@@ -57,3 +61,10 @@ parts:
       - -var
       - -share
       - -usr/share
+
+  scripts:
+    source: files/
+    plugin: dump
+    organize:
+      export-all: bin/export-all
+
