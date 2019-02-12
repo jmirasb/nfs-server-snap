@@ -22,8 +22,8 @@ apps:
     plugs: [home, removable-media, network, network-bind]
 
   export-all:
-    command: export-all
-    #daemon: simple
+    command: exportfs -a
+    daemon: simple
     plugs: [home, removable-media, network, network-bind]
     #stop-command: rpc.nfsd 0
     #post-stop-command: exportfs -au
