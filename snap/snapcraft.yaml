@@ -114,3 +114,7 @@ parts:
     plugin: dump
     organize:
       nfsdaemon: sbin/nfsdaemon
+
+    prime:
+      - -nfslib.patch
+      - -netconfig.patch
