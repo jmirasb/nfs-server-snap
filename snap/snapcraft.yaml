@@ -40,7 +40,7 @@ parts:
       - --sysconfdir=/var/snap/nfs-server/config
       - --disable-gssapi
 
-    stage:
+    prime:
       - -include
       - -share
 
@@ -59,7 +59,7 @@ parts:
     build-packages:
       - libsystemd-dev
 
-    stage:
+    prime:
       - -etc
       - -share
       - -usr/share
@@ -91,7 +91,7 @@ parts:
       - libblkid1
       - libevent-2.1-6
 
-    stage:
+    prime:
       - -etc
       - -include
       - -var
