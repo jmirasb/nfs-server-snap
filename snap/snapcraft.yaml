@@ -10,12 +10,12 @@ description: |
 
 apps:
   rpcbind:
-    command: rpcbind -w -f
+    command: rpcbind -wf
     #daemon: simple
     plugs: [network, network-bind]
     #sockets:
     #  rpcbind:
-    #    listen-stream: $SNAP_COMMON/state/rpcbind.sock
+    #    listen-stream: 0.0.0.0:111
 
   export-fs:
     command: exportfs
@@ -27,20 +27,43 @@ apps:
     plugs: [home, removable-media, network, network-bind]
 
 parts:
+  rpcbind:
+    plugin: autotools
+    source: git://git.linux-nfs.org/projects/steved/rpcbind.git
+    source-type: git
+    source-tag: rpcbind-0_2_3
+    source-depth: 1
+    configflags:
+      - --prefix=/
+      - --sysconfdir=/var/snap/nfs-server/config
+      - --with-statedir=/var/snap/nfs-server/common/state
+
+    build-packages:
+      - libtirpc-dev
+      - libsystemd-dev
+
+    stage-packages:
+      - libtirpc1
+
+    stage:
+      - -etc
+      - -share
+      - -usr/share
+
   nfs-utils:
     plugin: autotools
     source: git://git.linux-nfs.org/projects/steved/nfs-utils.git
     source-type: git
     source-tag: nfs-utils-2-3-3
     source-depth: 1
+    after: [ rpcbind ]
     configflags:
       - --prefix=/
-      - --with-statedir=/var/snap/nfs-utils/common/state
+      - --with-statedir=/var/snap/nfs-server/common/state
       - --disable-gss
       - --disable-mount
 
     build-packages:
-      - libtirpc-dev
       - libsqlite3-dev
       - libdevmapper-dev
       - libblkid-dev
@@ -49,11 +72,9 @@ parts:
       - libevent-dev
 
     stage-packages:
-      - libtirpc1
       - libsqlite3-0
       - libdevmapper1.02.1
       - libblkid1
-      - rpcbind
       - libevent-2.1-6
 
     stage:
@@ -68,4 +89,3 @@ parts:
     plugin: dump
     organize:
       export-all: bin/export-all
-
