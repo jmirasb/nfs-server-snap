@@ -11,22 +11,22 @@ description: |
 apps:
   rpcbind:
     command: rpcbind -f
-    #daemon: simple
+    daemon: simple
     plugs: [network, network-bind]
     #sockets:
     #  rpcbind:
     #    listen-stream: 0.0.0.0:111
 
-  export-fs:
+  exportfs:
     command: exportfs
     plugs: [home, removable-media, network, network-bind]
 
-  export-all:
-    command: exportfs -a
-    daemon: simple
+  nfsdaemon:
+    command: nfsdaemon
+    daemon: oneshot
     plugs: [home, removable-media, network, network-bind]
-    #stop-command: rpc.nfsd 0
-    #post-stop-command: exportfs -au
+    stop-command: rpc.nfsd 0
+    post-stop-command: sbin/exportfs -au
 
 parts:
   libtirpc:
@@ -113,4 +113,4 @@ parts:
     source: files/
     plugin: dump
     organize:
-      export-all: bin/export-all
+      nfsdaemon: sbin/nfsdaemon

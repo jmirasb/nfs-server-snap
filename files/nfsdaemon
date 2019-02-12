@@ -1,0 +1,8 @@
+#! /bin/sh
+
+# Starting nfs daemons and export all
+$SNAP/sbin/rpc.statd -P $SNAP_COMMON/state
+$SNAP/sbin/rpc.idmapd
+$SNAP/sbin/rpc.mountd
+$SNAP/sbin/rpc.nfsd
+$SNAP/sbin/exportfs -va
