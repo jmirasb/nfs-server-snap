@@ -83,6 +83,11 @@ parts:
       - --disable-gss
       - --disable-mount
 
+    override-pull: |
+      snapcraftctl pull
+      # Force new path for /etc/exports and /etc/exports.d
+      patch -p1 < ../../../files/nfslib.patch
+
     build-packages:
       - libsqlite3-dev
       - libdevmapper-dev

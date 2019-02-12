@@ -1,0 +1,15 @@
+--- a/support/include/nfslib.h	2019-02-12 18:08:24.422216389 +0100
++++ b/support/include/nfslib.h	2019-02-12 18:12:36.650139449 +0100
+@@ -24,10 +24,10 @@
+ #include "xlog.h"
+ 
+ #ifndef _PATH_EXPORTS
+-#define _PATH_EXPORTS		"/etc/exports"
++#define _PATH_EXPORTS		"/var/snap/nfs-server/common/config/exports"
+ #endif
+ #ifndef _PATH_EXPORTS_D
+-#define _PATH_EXPORTS_D         "/etc/exports.d"
++#define _PATH_EXPORTS_D         "/var/snap/nfs-server/common/config/exports.d"
+ #endif
+ #ifndef _EXT_EXPORT
+ #define _EXT_EXPORT             ".exports"
