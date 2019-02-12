@@ -1,0 +1,11 @@
+--- a/tirpc/netconfig.h 2019-02-12 17:33:27.948116523 +0100
++++ b/tirpc/netconfig.h 2019-02-12 17:33:27.948116523 +0100
+@@ -3,7 +3,7 @@
+ 
+ #include <features.h>
+ 
+-#define NETCONFIG "/etc/netconfig"
++#define NETCONFIG "/var/snap/nfs-server/common/config/netconfig"
+ #define NETPATH	  "NETPATH"
+ 
+ struct netconfig {

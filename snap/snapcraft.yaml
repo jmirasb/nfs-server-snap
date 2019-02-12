@@ -10,7 +10,7 @@ description: |
 
 apps:
   rpcbind:
-    command: rpcbind -wf
+    command: rpcbind -f
     #daemon: simple
     plugs: [network, network-bind]
     #sockets:
@@ -37,8 +37,13 @@ parts:
     source-depth: 1
     configflags:
       - --prefix=/
-      - --sysconfdir=/var/snap/nfs-server/config
+      - --sysconfdir=/var/snap/nfs-server/common/config
       - --disable-gssapi
+
+    override-pull: |
+      snapcraftctl pull
+      # Force new path for /etc/netconfig
+      patch -p1 < ../../../files/netconfig.patch
 
     prime:
       - -include
@@ -53,7 +58,7 @@ parts:
     after: [ libtirpc ]
     configflags:
       - --prefix=/
-      - --sysconfdir=/var/snap/nfs-server/config
+      - --sysconfdir=/var/snap/nfs-server/common/config
       - --with-statedir=/var/snap/nfs-server/common/state
 
     build-packages:
@@ -73,6 +78,7 @@ parts:
     after: [ rpcbind ]
     configflags:
       - --prefix=/
+      - --sysconfdir=/var/snap/nfs-server/common/config
       - --with-statedir=/var/snap/nfs-server/common/state
       - --disable-gss
       - --disable-mount
