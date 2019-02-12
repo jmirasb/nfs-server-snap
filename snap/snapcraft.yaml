@@ -25,6 +25,8 @@ apps:
     command: export-all
     #daemon: simple
     plugs: [home, removable-media, network, network-bind]
+    #stop-command: rpc.nfsd 0
+    #post-stop-command: exportfs -au
 
 parts:
   rpcbind:
