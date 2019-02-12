@@ -29,23 +29,35 @@ apps:
     #post-stop-command: exportfs -au
 
 parts:
+  libtirpc:
+    plugin: autotools
+    source: git://git.linux-nfs.org/projects/steved/libtirpc.git
+    source-type: git
+    source-tag: libtirpc-0-2-5
+    source-depth: 1
+    configflags:
+      - --prefix=/
+      - --sysconfdir=/var/snap/nfs-server/config
+      - --disable-gssapi
+
+    stage:
+      - -include
+      - -share
+
   rpcbind:
     plugin: autotools
     source: git://git.linux-nfs.org/projects/steved/rpcbind.git
     source-type: git
     source-tag: rpcbind-0_2_3
     source-depth: 1
+    after: [ libtirpc ]
     configflags:
       - --prefix=/
       - --sysconfdir=/var/snap/nfs-server/config
       - --with-statedir=/var/snap/nfs-server/common/state
 
     build-packages:
-      - libtirpc-dev
       - libsystemd-dev
-
-    stage-packages:
-      - libtirpc1
 
     stage:
       - -etc
