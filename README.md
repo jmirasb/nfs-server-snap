@@ -29,7 +29,20 @@ and stop the exports using:
 
 Visit http://nfs.sourceforge.net/nfs-howto/ar01s03.html for more information and configuration options.
 
+You may announce exported filesystems using avahi snap. You just need to create the appropriate service in the avahi config directory (/var/snap/avahi/common/etc/avahi/services):
 
+     $ <?xml version="1.0" standalone='no'?>
+     $ <!DOCTYPE service-group SYSTEM "avahi-service.dtd">
+     $ <service-group>
+     $ <name replace-wildcards="yes">MYDRIVE shared in %h</name>
+     $ <service>
+     $ <type>_nfs._tcp</type>
+     $ <port>2049</port>
+     $ <txt-record>path=/media/MYDRIVE</txt-record>
+     $ </service>
+     $ </service-group>
+
+If you announce the nfs export you must add "insecure" in the export option.
 
 ## Issues
 
