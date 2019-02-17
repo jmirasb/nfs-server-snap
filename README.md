@@ -14,7 +14,7 @@ and create the snap using snapcraft:
 
 or download directly the snap in release section and install using snap:
 
-    $ sudo snap install <snap> --dangerous
+    $ sudo snap install <snap> --dangerous --devmode
 
 ## Configure
 
@@ -28,6 +28,8 @@ and stop the exports using:
     $ systemctl stop snap.nfs-server.nfsdaemon.service
 
 Visit http://nfs.sourceforge.net/nfs-howto/ar01s03.html for more information and configuration options.
+
+
 
 ## Issues
 
