@@ -18,7 +18,7 @@ apps:
     #    listen-stream: 0.0.0.0:111
 
   exportfs:
-    command: exportfs
+    command: sudo $SNAP/sbin/exportfs
     plugs: [home, removable-media, network, network-bind]
 
   nfsdaemon:

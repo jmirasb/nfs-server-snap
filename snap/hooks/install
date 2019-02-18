@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
 # Create state directory and exports file
-mkdir -p $SNAP_COMMON/state $SNAP_COMMON/config
+mkdir -p $SNAP_COMMON/state/sm $SNAP_COMMON/config
 touch $SNAP_COMMON/state/etab $SNAP_COMMON/state/rmtab $SNAP_COMMON/config/exports
 cp $SNAP/var/snap/nfs-server/common/config/netconfig $SNAP_COMMON/config/netconfig
